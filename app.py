@@ -5,6 +5,9 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from pymediainfo import MediaInfo
 import logging
+import subprocess
+from flask import request
+
 
 logging.basicConfig(filename='flask_errors.log', level=logging.ERROR)
 
@@ -14,6 +17,8 @@ db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),'instance/vide
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 
 db = SQLAlchemy(app)
+
+
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -93,6 +98,13 @@ def update():
     return {'youtube': youtube_added, 'vice': vice_added, 'twitch': twitch_added}
 
 
+@app.route('/api/deploy', methods=['POST'])
+def deploy():
+    if request.method == 'POST':
+        subprocess.call('./deploy.sh', shell=True)
+        return 'Deployment in progress...', 200
+    else:
+        return 'Invalid request', 400
 
 if __name__ == '__main__':
     youtube_path = '/root/whatbox_mount/youtube'
