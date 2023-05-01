@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Videos</title>
+	 <style>
+	  table {
+	    width: 100%;
+	    border-collapse: collapse;
+	    overflow-x: auto;
+	  }
+	  th, td {
+	    border: 1px solid #ccc;
+	    padding: 8px;
+	    text-align: left;
+	  }
+	  th {
+	    background-color: #f2f2f2;
+	  }
+	  tr:nth-child(even) {
+	    background-color: #f2f2f2;
+	  }
+	</style>
+  </head>
+  <body>
+    <h1>Videos</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>File Name</th>
+          <th>File Extension</th>
+          <th>File Size</th>
+          <th>Other File Size</th>
+          <th>Duration</th>
+          <th>Other Duration</th>
+          <th>Video Codec</th>
+          <th>Audio Codec</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for video in videos %}
+          <tr>
+            <td>{{ video.source }}</td>
+            <td>{{ video.file_name }}</td>
+            <td>{{ video.file_extension }}</td>
+            <td>{{ video.file_size }}</td>
+            <td>{{ video.other_file_size }}</td>
+            <td>{{ video.duration }}</td>
+            <td>{{ video.other_duration }}</td>
+            <td>{{ video.codecs_video }}</td>
+            <td>{{ video.audio_codecs }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
